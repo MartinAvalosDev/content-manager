@@ -26,4 +26,14 @@ export class ContentService {
         const newContent = await this.contentModel.create(content)
         return newContent
     }
+    
+    async updateContent(episodeId:number, content: Content): Promise<Content>{
+        const film = await this.contentModel.findOne({episode_id: episodeId })
+        if (!film) throw new NotFoundException('The film you wanna update does not exist')
+        const updatedContent= await this.contentModel.findByIdAndUpdate(film._id, content,{
+            new: true,
+            runValidator: true
+        })
+        return updatedContent     
+        }
 }

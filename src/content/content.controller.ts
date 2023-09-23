@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { ContentService } from './content.service';
 import { Content } from './schemas/content.schema';
 import { CreateContentDto } from './dtos/create-content.dto';
+import { UpdateContentDto } from './dtos/update-content.dto';
 
 @Controller('contents')
 export class ContentController {
@@ -23,8 +24,18 @@ export class ContentController {
     @Post('/newContent')
     async createNewContent(
         @Body()
-        body: CreateContentDto
+        content: CreateContentDto
     ): Promise<Content>{
-        return this.contentService.createContent(body)
+        return this.contentService.createContent(content)
+    }
+    
+    @Put(':episodeId')
+    async updateContent(
+        @Param('episodeId')
+        episodeId: number,
+        @Body()
+        content: UpdateContentDto
+    ): Promise<Content>{
+        return this.contentService.updateContent(episodeId, content)
     }
 }
