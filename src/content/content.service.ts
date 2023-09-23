@@ -35,5 +35,11 @@ export class ContentService {
             runValidator: true
         })
         return updatedContent     
-        }
+    }
+    async deleteContent(episodeId:number): Promise<Content>{
+        const film = await this.contentModel.findOne({episode_id: episodeId })
+        if (!film) throw new NotFoundException('The film you wanna delete does not exist')
+        const deletedContent= await this.contentModel.findByIdAndDelete(film._id)
+        return deletedContent     
+    }
 }

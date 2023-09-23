@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Delete } from '@nestjs/common';
 import { ContentService } from './content.service';
 import { Content } from './schemas/content.schema';
 import { CreateContentDto } from './dtos/create-content.dto';
 import { UpdateContentDto } from './dtos/update-content.dto';
+import { DeleteContentDto } from './dtos/delete-content.dto';
 
 @Controller('contents')
 export class ContentController {
@@ -37,5 +38,12 @@ export class ContentController {
         content: UpdateContentDto
     ): Promise<Content>{
         return this.contentService.updateContent(episodeId, content)
+    }
+    @Delete(':episodeId')
+    async deleteContent(
+        @Param('episodeId')
+        episodeId: number,
+    ): Promise<Content>{
+        return this.contentService.deleteContent(episodeId)
     }
 }
