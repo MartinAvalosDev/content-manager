@@ -30,7 +30,7 @@ export class ContentController {
         return this.contentService.createContent(content)
     }
     
-    @Put(':episodeId')
+    @Put('/updateContent/:episodeId')
     async updateContent(
         @Param('episodeId')
         episodeId: number,
@@ -39,7 +39,7 @@ export class ContentController {
     ): Promise<Content>{
         return this.contentService.updateContent(episodeId, content)
     }
-    @Delete(':episodeId')
+    @Delete('/deleteContent/:episodeId')
     async deleteContent(
         @Param('episodeId')
         episodeId: number,
