@@ -3,7 +3,6 @@ import { ContentService } from './content.service';
 import { Content } from './schemas/content.schema';
 import { CreateContentDto } from './dtos/create-content.dto';
 import { UpdateContentDto } from './dtos/update-content.dto';
-import { DeleteContentDto } from './dtos/delete-content.dto';
 
 @Controller('contents')
 export class ContentController {
