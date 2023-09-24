@@ -21,6 +21,11 @@ export class ContentController {
         return this.contentService.findContentById(episodeId)
     }
 
+    @Post('/coldStart')
+    async loadDataSource(): Promise<Content>{
+        return this.contentService.loadDataSource()
+    }
+
     @Post('/newContent')
     async createNewContent(
         @Body()

@@ -1,4 +1,4 @@
-const films = [
+export const films = [
     {
         "title": "A New Hope",
         "episode_id": 4,
