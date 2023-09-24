@@ -11,6 +11,8 @@ import { AuthModule } from '../auth/auth.module';
     MongooseModule.forFeature([{ name: 'Content', schema: ContentSchema}])
   ],
   controllers: [ContentController],
-  providers: [ContentService]
+  providers: [
+    ContentService
+  ]
 })
 export class ContentModule {}

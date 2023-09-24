@@ -16,21 +16,16 @@ export class AuthService {
         private jwtService: JwtService
     ){}
 
-    async signup(signupDto: SignupDto): Promise<{message: string, token: string}>{
-        const {name, email, password} = signupDto
+    async signup(signupDto: SignupDto): Promise<{message: string,}>{
+        const {role, email, password} = signupDto
         const hashPassword = await bcrypt.hash(password, 10)
-
-        const user = await this.userModel.create({
-            name,
+        
+        await this.userModel.create({
+            role,
             email,
             password: hashPassword
         })
-
-        const token = await this.jwtService.sign({
-            id: user._id
-        })
-
-        return {message: 'Se ha registrado correctamente. Utilice este token para logearse :)', token: token }
+        return {message: 'Se ha registrado correctamente.'}
     }
 
     async login(loginDto: LoginDto): Promise<{message: string, token: string}>{
@@ -43,6 +38,7 @@ export class AuthService {
         if(!isPasswordMatched) throw new UnauthorizedException('Invalid email or password')
 
         const token = await this.jwtService.sign({
+            role: user.role,
             id: user._id
         })
 

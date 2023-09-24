@@ -1,8 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Content } from './schemas/content.schema';
 import * as mongoose from 'mongoose';
 import { films } from 'src/types/films.types';
+import { Role } from '../auth/dtos/signup.dto';
 
 @Injectable()
 export class ContentService {
@@ -29,7 +30,8 @@ export class ContentService {
         return content
     }
 
-    async createContent(content: Content): Promise<Content>{
+    async createContent(content: Content, role: Role): Promise<Content>{
+        if(role === Role.USER) throw new UnauthorizedException('Necesita ser Administrador para agregar un nuevo contenido')
         const newContent = await this.contentModel.create(content)
         return newContent
     }

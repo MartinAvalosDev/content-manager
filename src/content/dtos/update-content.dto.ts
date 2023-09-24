@@ -1,4 +1,5 @@
-import { IsString, IsNumber } from "class-validator";
+import { IsString, IsNumber, IsEmpty } from "class-validator";
+import { User } from "../../auth/schemas/user.schema";
 
 export class UpdateContentDto{
     @IsString()
@@ -34,5 +35,8 @@ export class UpdateContentDto{
 
     @IsString()
     readonly url: string;
+
+    @IsEmpty({message: "You cannot pass the user role"})
+    readonly user: User
     
 }

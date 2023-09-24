@@ -1,11 +1,12 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Role } from "../dtos/signup.dto";
 
 @Schema({
     timestamps: true,
 })
 export class User{
     @Prop()
-    name: string;
+    role: Role;
 
     @Prop({
         unique: [true, 'Duplicate email entered']

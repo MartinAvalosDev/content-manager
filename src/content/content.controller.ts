@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Param, Post, Put, Delete, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Delete, UseGuards, Req } from '@nestjs/common';
 import { ContentService } from './content.service';
 import { Content } from './schemas/content.schema';
 import { CreateContentDto } from './dtos/create-content.dto';
 import { UpdateContentDto } from './dtos/update-content.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { Role } from '../auth/dtos/signup.dto';
 
 @Controller('contents')
 export class ContentController {
@@ -33,9 +34,13 @@ export class ContentController {
     @UseGuards(AuthGuard())
     async createNewContent(
         @Body()
-        content: CreateContentDto
+        content: CreateContentDto,
+        @Req()
+        req
     ): Promise<Content>{
-        return this.contentService.createContent(content)
+        console.log(req.user.role);
+        
+        return this.contentService.createContent(content, req.user.role)
     }
     
     @Put('/updateContent/:episodeId')
@@ -48,6 +53,7 @@ export class ContentController {
     ): Promise<Content>{
         return this.contentService.updateContent(episodeId, content)
     }
+
     @Delete('/deleteContent/:episodeId')
     @UseGuards(AuthGuard())
     async deleteContent(
