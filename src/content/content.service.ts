@@ -18,12 +18,14 @@ export class ContentService {
         return 
     }
 
-    async findContents(): Promise<Content[]>{
+    async findContents(role: Role): Promise<Content[]>{        
+        if(role === Role.ADMIN) throw new UnauthorizedException('Unicamente los Usuarios Regulares pueden obtener contenidos')
         const contents = await this.contentModel.find()
         return contents
     }
    
-    async findContentById(episodeId: number): Promise<Content>{
+    async findContentById(episodeId: number,role: Role): Promise<Content>{
+        if(role === Role.ADMIN) throw new UnauthorizedException('Unicamente los Usuarios Regulares pueden obtener contenidos')
         const content = await this.contentModel.findOne({episode_id: episodeId })
         if(!content) 
         throw new NotFoundException('La pelicula que queres encontrar no existe, probá con otra!')
@@ -36,7 +38,8 @@ export class ContentService {
         return newContent
     }
     
-    async updateContent(episodeId:number, content: Content): Promise<Content>{
+    async updateContent(episodeId:number, content: Content,role: Role): Promise<Content>{
+        if(role === Role.USER) throw new UnauthorizedException('Necesita ser Administrador para editar un contenido')
         const film = await this.contentModel.findOne({episode_id: episodeId })
         if (!film) throw new NotFoundException('La pelicula que queres actualizar no existe, probá con otra!')
         const updatedContent= await this.contentModel.findByIdAndUpdate(film._id, content,{
@@ -45,7 +48,8 @@ export class ContentService {
         })
         return updatedContent     
     }
-    async deleteContent(episodeId:number): Promise<Content>{
+    async deleteContent(episodeId:number,role: Role): Promise<Content>{
+        if(role === Role.USER) throw new UnauthorizedException('Necesita ser Administrador para eliminar un contenido')
         const film = await this.contentModel.findOne({episode_id: episodeId })
         if (!film) throw new NotFoundException('La pelicula que queres borrar no existe, probá con otra!')
         const deletedContent= await this.contentModel.findByIdAndDelete(film._id)

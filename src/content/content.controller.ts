@@ -12,17 +12,22 @@ export class ContentController {
 
     @Get()
     @UseGuards(AuthGuard())
-    async getAllFilms(): Promise<Content[]>{
-        return this.contentService.findContents()
+    async getAllFilms(
+        @Req()
+        req
+    ): Promise<Content[]>{
+        return this.contentService.findContents(req.user.role)
     }
     
     @Get(':episodeId')
     @UseGuards(AuthGuard())
     async getFilmById(
         @Param('episodeId')
-        episodeId: number
+        episodeId: number,
+        @Req()
+        req
     ): Promise<Content>{
-        return this.contentService.findContentById(episodeId)
+        return this.contentService.findContentById(episodeId,req.user.role)
     }
 
     @Post('/coldStart')
@@ -37,9 +42,7 @@ export class ContentController {
         content: CreateContentDto,
         @Req()
         req
-    ): Promise<Content>{
-        console.log(req.user.role);
-        
+    ): Promise<Content>{        
         return this.contentService.createContent(content, req.user.role)
     }
     
@@ -49,9 +52,11 @@ export class ContentController {
         @Param('episodeId')
         episodeId: number,
         @Body()
-        content: UpdateContentDto
+        content: UpdateContentDto,
+        @Req()
+        req
     ): Promise<Content>{
-        return this.contentService.updateContent(episodeId, content)
+        return this.contentService.updateContent(episodeId, content, req.user.role)
     }
 
     @Delete('/deleteContent/:episodeId')
@@ -59,7 +64,9 @@ export class ContentController {
     async deleteContent(
         @Param('episodeId')
         episodeId: number,
+        @Req()
+        req
     ): Promise<Content>{
-        return this.contentService.deleteContent(episodeId)
+        return this.contentService.deleteContent(episodeId, req.user.role)
     }
 }
