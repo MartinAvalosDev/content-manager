@@ -37,7 +37,18 @@ Debemos pasar por Authorization header el token que hayamos recibido en el login
 
 Solo queda mirar el codigo y las buenas practicas llevadas a cabo, modularizando los componentes de auth y contents, creando colecciones distintas de mongo para los users y para los contents, usando Dto´s para validar los campos del body, enviados tanto para crear como updatear contenidos (Tienen distintas validaciones).
 
+## Informacion sobre archivo .ENV:
 
+Será necesario agregar un .env file para correr la app.
+
+MONGO_URI=mongodb://localhost:27017/content-manager
+
+JWT_SECRET=martinavalosdev
+JWT_EXPIRES=1d
+
+## Informacion sobre MONGODB:
+
+La aplicacion utiliza una base de datos MongoDB. Recomiendo descargar mongoDB Compass, y crear una nueva conexion para poder visualizar como se guardan en distintas colecciones los documentos creados a lo largo de la app.
 ## Informacion sobre los [/ENDPOINTS]:
 
 /coldStart [RutaPublica]
