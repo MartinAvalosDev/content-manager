@@ -31,6 +31,12 @@ Ademas cuenta con un proceso de signup y login, el cual nos permite autenticarno
 Muy importante, el primer paso antes de interacturar con la app, es cargar la base de datos con peliculas base obtenidas desde SWAPI. Para ello debemos correr el endpoint /coldStart,
 el cual no pide credenciales de ningun tipo.
 
+El primer paso es registranos en /signup, luego con el mismo email y password pasaremos a logearos en /login. 
+Una vez que hayamos iniciado sesion podremos operar los distintos metodos mencionados anteriormente.
+Debemos pasar por Authorization header el token que hayamos recibido en el login. (Atencion! ese token lleva dentro el rol y user_id de mongo, por lo cual en todo momento la app sabra que rol tiene ese usuario a traves del token, ademas de autenticarlo)
+
+Solo queda mirar el codigo y las buenas practicas llevadas a cabo, modularizando los componentes de auth y contents, creando colecciones distintas de mongo para los users y para los contents, usando Dto´s para validar los campos del body, enviados tanto para crear como updatear contenidos (Tienen distintas validaciones).
+
 
 ## Informacion sobre los [/ENDPOINTS]:
 
