@@ -235,7 +235,7 @@ describe('ContentService', () => {
   });
       
   describe('updateContent', () => {
-        it('should update and return a book', async () => {
+        it('should update and return a content', async () => {
       const updatedContent = { ...mockContent, title: 'Updated name' };
       const content = { title: 'Updated name' };
       const role: Role = Role.USER;
