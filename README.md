@@ -22,10 +22,188 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Informacion sobre [content-manager]:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+content-manager es una API basada en la data que se obtiene en SWAPI, la api de star wars.
+Su funcion es operar con los contenidos, se puede crear, editar, eliminar, y obtener peliculas.
+Ademas cuenta con un proceso de signup y login, el cual nos permite autenticarnos y acceder a los diferentes endpoints en caso de estar autorizados.
 
+Muy importante, el primer paso antes de interacturar con la app, es cargar la base de datos con peliculas base obtenidas desde SWAPI. Para ello debemos correr el endpoint /coldStart,
+el cual no pide credenciales de ningun tipo.
+
+
+## Informacion sobre los [/ENDPOINTS]:
+
+/coldStart [RutaPublica]
+-[POST] /contens/coldStart :
+Permite cargar la base de datos con las peliculas obtenidas desde SWAPI. Una vez que se corra este endpoint, se puede seguir con el proceso e2e desde signup, login , y las distintas rutas funcionales.
+curl postman:
+curl --location --request POST 'http://localhost:3000/contents/coldStart'
+
+/auth [RutasPublicas]
+
+-[POST] /auth/signup :
+Permite crear un nuevo user, en el body pasaremos por unica vez el ROL de esta credencial, el email, y el password. Retorna un string validando el signup. En el campo "role" podremos elegir entre crearnos un user "Usuario Regular" o "Administrador", en este curl esta seteado el perfil Administrador. Guarda el registro en la coleccion de users.
+curl postman:
+curl --location 'http://localhost:3000/auth/signup' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "role": "Administrador",
+    "email": "martin_admin@conexa.com",
+    "password": "H0la1234"
+}'
+
+-[POST] /auth/login :
+Permite logearnos con email y password. Retorna un token de acceso para las rutas restringidas, y un mensaje de validacion. Tiene que coincidir con user ya registrado previamente en /signup, importante logearse, de lo contrario no podremos acceder a ninguna ruta por mas token que mandemos en las pegadas de /contents que veremos mas adelante.
+curl postman:
+curl --location 'http://localhost:3000/auth/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "martin_admin@conexa.com",
+    "password": "H0la1234"
+}'
+
+/contents [RutasRestringidas]
+
+-[GET] /contents :
+Retorna un array de {contenido} que estan almacenados en la base de datos.(Solo tiene acceso el rol USER).
+Curl postman: 
+curl --location 'http://localhost:3000/contents/' \
+--header 'Authorization: Bearer [tokenUSER]'
+
+-[GET] /contents/:episode_id :
+Retorna un {contenido} y sus detalles, a traves del episode_id que se haya pasado. No se utilizó el "_id" de mongo, ya que se queria lograr una experiencia mas amigable. (Solo tiene acceso el rol USER).
+Curl postman: 
+curl --location 'http://localhost:3000/contents/1' \
+--header 'Authorization: Bearer [tokenUSER]'
+
+-[POST] /contents/newContent : 
+Agrega una nueva pelicula a la coleccion de contents, se requiere autorizacion con token obtenido en /auth/login (Solo tiene acceso el rol ADMIN). En el body pasaremos un json que coincida con el [CreateContentDto], donde se valida que se cumplan todos los campos, de no ser asi no se podra agregar un nuevo contenido. Retorna la pelicula agregada.
+Curl postman: 
+curl --location 'http://localhost:3000/contents/newContent' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer [tokenADMIN]' \
+--data '{
+    "title": "Pelicula Prueba",
+    "episode_id": 12,
+    "opening_crawl": "It is a period of civil war.\r\nRebel spaceships, striking\r\nfrom a hidden base, have won\r\ntheir first victory against\r\nthe evil Galactic Empire.\r\n\r\nDuring the battle, Rebel\r\nspies managed to steal secret\r\nplans to the Empire'\''s\r\nultimate weapon, the DEATH\r\nSTAR, an armored space\r\nstation with enough power\r\nto destroy an entire planet.\r\n\r\nPursued by the Empire'\''s\r\nsinister agents, Princess\r\nLeia races home aboard her\r\nstarship, custodian of the\r\nstolen plans that can save her\r\npeople and restore\r\nfreedom to the galaxy....",
+    "director": "George Lucas",
+    "producer": "Gary Kurtz, Rick McCallum",
+    "release_date": "1977-05-25",
+    "characters": [
+        "https://swapi.dev/api/people/1/",
+        "https://swapi.dev/api/people/2/",
+        "https://swapi.dev/api/people/3/",
+        "https://swapi.dev/api/people/4/",
+        "https://swapi.dev/api/people/5/",
+        "https://swapi.dev/api/people/6/",
+        "https://swapi.dev/api/people/7/",
+        "https://swapi.dev/api/people/8/",
+        "https://swapi.dev/api/people/9/",
+        "https://swapi.dev/api/people/10/",
+        "https://swapi.dev/api/people/12/",
+        "https://swapi.dev/api/people/13/",
+        "https://swapi.dev/api/people/14/",
+        "https://swapi.dev/api/people/15/",
+        "https://swapi.dev/api/people/16/",
+        "https://swapi.dev/api/people/18/",
+        "https://swapi.dev/api/people/19/",
+        "https://swapi.dev/api/people/81/"
+    ],
+    "planets": [
+        "https://swapi.dev/api/planets/1/",
+        "https://swapi.dev/api/planets/2/",
+        "https://swapi.dev/api/planets/3/"
+    ],
+    "starships": [
+        "https://swapi.dev/api/starships/2/",
+        "https://swapi.dev/api/starships/3/",
+        "https://swapi.dev/api/starships/5/",
+        "https://swapi.dev/api/starships/9/",
+        "https://swapi.dev/api/starships/10/",
+        "https://swapi.dev/api/starships/11/",
+        "https://swapi.dev/api/starships/12/",
+        "https://swapi.dev/api/starships/13/"
+    ],
+    "vehicles":[
+        "vehiculo 1"
+    ],
+    "species": [
+        "https://swapi.dev/api/species/1/",
+        "https://swapi.dev/api/species/2/",
+        "https://swapi.dev/api/species/3/",
+        "https://swapi.dev/api/species/4/",
+        "https://swapi.dev/api/species/5/"
+    ],
+    "created": "2014-12-10T14:23:31.880000Z",
+    "edited": "2014-12-20T19:49:45.256000Z",
+    "url": "https://swapi.dev/api/films/1/"
+}'
+
+-[PUT] /contents/updateContent/:episode_id : Actualiza una pelicula existente en la coleccion de contents, se requiere autorizacion con token obtenido en /auth/login (Solo tiene acceso el rol ADMIN). En el body pasaremos un json que coincida con el [UpdateContentDto], donde se valida que se cumplan todos los campos, de no ser asi no se podra agregar un nuevo contenido.
+curl postman: 
+curl --location --request PUT 'http://localhost:3000/contents/updateContent/3' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer [tokenADMIN]' \
+--data '{
+    "title": "la uno actualizadaa",
+    "episode_id": 1,
+    "opening_crawl": "It is a period of civil war.\r\nRebel spaceships, striking\r\nfrom a hidden base, have won\r\ntheir first victory against\r\nthe evil Galactic Empire.\r\n\r\nDuring the battle, Rebel\r\nspies managed to steal secret\r\nplans to the Empire'\''s\r\nultimate weapon, the DEATH\r\nSTAR, an armored space\r\nstation with enough power\r\nto destroy an entire planet.\r\n\r\nPursued by the Empire'\''s\r\nsinister agents, Princess\r\nLeia races home aboard her\r\nstarship, custodian of the\r\nstolen plans that can save her\r\npeople and restore\r\nfreedom to the galaxy....",
+    "director": "George Lucas",
+    "producer": "Gary Kurtz, Rick McCallum",
+    "release_date": "1977-05-25",
+    "characters": [
+        "https://swapi.dev/api/people/1/",
+        "https://swapi.dev/api/people/2/",
+        "https://swapi.dev/api/people/3/",
+        "https://swapi.dev/api/people/4/",
+        "https://swapi.dev/api/people/5/",
+        "https://swapi.dev/api/people/6/",
+        "https://swapi.dev/api/people/7/",
+        "https://swapi.dev/api/people/8/",
+        "https://swapi.dev/api/people/9/",
+        "https://swapi.dev/api/people/10/",
+        "https://swapi.dev/api/people/12/",
+        "https://swapi.dev/api/people/13/",
+        "https://swapi.dev/api/people/14/",
+        "https://swapi.dev/api/people/15/",
+        "https://swapi.dev/api/people/16/",
+        "https://swapi.dev/api/people/18/",
+        "https://swapi.dev/api/people/19/",
+        "https://swapi.dev/api/people/81/"
+    ],
+    "planets": [
+        "https://swapi.dev/api/planets/1/",
+        "https://swapi.dev/api/planets/2/",
+        "https://swapi.dev/api/planets/3/"
+    ],
+    "starships": [
+        "https://swapi.dev/api/starships/2/",
+        "https://swapi.dev/api/starships/3/",
+        "https://swapi.dev/api/starships/5/",
+        "https://swapi.dev/api/starships/9/",
+        "https://swapi.dev/api/starships/10/",
+        "https://swapi.dev/api/starships/11/",
+        "https://swapi.dev/api/starships/12/",
+        "https://swapi.dev/api/starships/13/"
+    ],
+    "species": [
+        "https://swapi.dev/api/species/1/",
+        "https://swapi.dev/api/species/2/",
+        "https://swapi.dev/api/species/3/",
+        "https://swapi.dev/api/species/4/",
+        "https://swapi.dev/api/species/5/"
+    ],
+    "created": "2014-12-10T14:23:31.880000Z",
+    "edited": "2014-12-20T19:49:45.256000Z",
+    "url": "https://swapi.dev/api/films/1/"
+}'
+
+-[DELETE] /contents/deleteContent/:episode_id :
+Elimina un {contenido} y retorna sus detalles, a traves del episode_id que se haya pasado. No se utilizó el "_id" de mongo, ya que se queria lograr una experiencia mas amigable. (Solo tiene acceso el rol ADMIN).
+Curl postman: 
+curl --location --request DELETE 'http://localhost:3000/contents/deleteContent/1' \
+--header 'Authorization: Bearer [tokenADMIN]'
 ## Installation
 
 ```bash
