@@ -44,6 +44,7 @@ Será necesario agregar un .env file para correr la app.
 MONGO_URI=mongodb://localhost:27017/content-manager
 
 JWT_SECRET=martinavalosdev
+
 JWT_EXPIRES=1d
 
 ## Informacion sobre MONGODB:
