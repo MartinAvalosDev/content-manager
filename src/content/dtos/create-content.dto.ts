@@ -1,7 +1,7 @@
 import { IsString, IsNumber, IsNotEmpty, IsEmpty } from "class-validator";
 import { User } from "../../auth/schemas/user.schema";
 
-export class CreateContentDto{
+export class CreateContentDto {
     @IsNotEmpty()
     @IsString()
     readonly title: string;
@@ -28,17 +28,17 @@ export class CreateContentDto{
     @IsNotEmpty()
     readonly characters: [string];
 
-    
+
     @IsNotEmpty()
     readonly planets: [string];
 
-    
+
     @IsNotEmpty()
     readonly starships: [string];
-    
+
     @IsNotEmpty()
     readonly vehicles: [string];
-    
+
     @IsNotEmpty()
     readonly species: [string];
 
@@ -52,8 +52,8 @@ export class CreateContentDto{
 
     @IsNotEmpty()
     @IsString()
-    readonly url: string;   
-    
-    @IsEmpty({message: "You cannot pass the user role"})
+    readonly url: string;
+
+    @IsEmpty({ message: "You cannot pass the user role" })
     readonly user: User
 }

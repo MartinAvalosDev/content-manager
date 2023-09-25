@@ -4,21 +4,21 @@ import { Content } from './schemas/content.schema';
 import { CreateContentDto } from './dtos/create-content.dto';
 import { UpdateContentDto } from './dtos/update-content.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { Role } from '../auth/dtos/signup.dto';
+
 
 @Controller('contents')
 export class ContentController {
-    constructor(private contentService: ContentService){}
+    constructor(private contentService: ContentService) { }
 
     @Get()
     @UseGuards(AuthGuard())
     async getAllFilms(
         @Req()
         req
-    ): Promise<Content[]>{
+    ): Promise<Content[]> {
         return this.contentService.findContents(req.user.role)
-    }
-    
+    };
+
     @Get(':episodeId')
     @UseGuards(AuthGuard())
     async getFilmById(
@@ -26,12 +26,12 @@ export class ContentController {
         episodeId: number,
         @Req()
         req
-    ): Promise<Content>{
-        return this.contentService.findContentById(episodeId,req.user.role)
+    ): Promise<Content> {
+        return this.contentService.findContentById(episodeId, req.user.role)
     }
 
     @Post('/coldStart')
-    async loadDataSource(): Promise<Content>{
+    async loadDataSource(): Promise<Content> {
         return this.contentService.loadDataSource()
     }
 
@@ -42,10 +42,10 @@ export class ContentController {
         content: CreateContentDto,
         @Req()
         req
-    ): Promise<Content>{        
+    ): Promise<Content> {
         return this.contentService.createContent(content, req.user.role)
     }
-    
+
     @Put('/updateContent/:episodeId')
     @UseGuards(AuthGuard())
     async updateContent(
@@ -55,7 +55,7 @@ export class ContentController {
         content: UpdateContentDto,
         @Req()
         req
-    ): Promise<Content>{
+    ): Promise<Content> {
         return this.contentService.updateContent(episodeId, content, req.user.role)
     }
 
@@ -66,7 +66,7 @@ export class ContentController {
         episodeId: number,
         @Req()
         req
-    ): Promise<Content>{
+    ): Promise<Content> {
         return this.contentService.deleteContent(episodeId, req.user.role)
     }
 }

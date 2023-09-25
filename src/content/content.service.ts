@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/co
 import { InjectModel } from '@nestjs/mongoose';
 import { Content } from './schemas/content.schema';
 import * as mongoose from 'mongoose';
-import { films } from 'src/types/films.types';
+import { films } from '../types/films.types';
 import { Role } from '../auth/dtos/signup.dto';
 
 @Injectable()
