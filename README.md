@@ -51,8 +51,13 @@ JWT_EXPIRES=1d
 
 La aplicacion utiliza una base de datos MongoDB. Recomiendo descargar mongoDB Compass, y crear una nueva conexion para poder visualizar como se guardan en distintas colecciones los documentos creados a lo largo de la app.
 
+Asi se verá la base de datos, y sus colecciones:
 ![Alt text](image.png)
+
+Asi se veran los documentos insertados en la colección de "contents", tal cual responde SWAPI.
 ![Alt text](image-1.png)
+
+Y este es el data pattern que elegí para registrar los usuarios en la coleccion de "users".
 ![Alt text](image-2.png)
 ## Informacion sobre los [/ENDPOINTS]:
 
