@@ -51,8 +51,9 @@ JWT_EXPIRES=1d
 
 La aplicacion utiliza una base de datos MongoDB. Recomiendo descargar mongoDB Compass, y crear una nueva conexion para poder visualizar como se guardan en distintas colecciones los documentos creados a lo largo de la app.
 
-![Alt text](image-1.png)
 ![Alt text](image.png)
+![Alt text](image-1.png)
+![Alt text](image-2.png)
 ## Informacion sobre los [/ENDPOINTS]:
 
 /coldStart [RutaPublica]
