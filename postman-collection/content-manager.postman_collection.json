@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "de4bfd39-1d74-4417-a7df-c795f9a9bafa",
+		"name": "content-manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24726372"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "http://localhost:3000/auth/signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\": \"Administrador\",\r\n    \"email\": \"martinavalos@conex.com\",\r\n    \"password\": \"H0la1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/auth/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/auth/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tincho.avalos98@hotmail.com\",\r\n    \"password\": \"H0la1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/auth/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Folder",
+			"item": []
+		},
+		{
+			"name": "http://localhost:3000/content",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiVXN1YXJpbyBSZWd1bGFyIiwiaWQiOiI2NTEwZDlkNTk1OWU4NzJjYmI2MDQ0MzEiLCJpYXQiOjE2OTU2MDMxNzAsImV4cCI6MTY5NTY4OTU3MH0.qDLAr22qLHCqgNguOM0qUFUt5KFf6RO3l1Kwl-SCeG0"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/contents"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/contents/newContent",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiVXN1YXJpbyBSZWd1bGFyIiwiaWQiOiI2NTEwZDlkNTk1OWU4NzJjYmI2MDQ0MzEiLCJpYXQiOjE2OTU2MDMxNzAsImV4cCI6MTY5NTY4OTU3MH0.qDLAr22qLHCqgNguOM0qUFUt5KFf6RO3l1Kwl-SCeG0"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Pelicula Prueba\",\r\n    \"episode_id\": 12,\r\n    \"opening_crawl\": \"It is a period of civil war.\\r\\nRebel spaceships, striking\\r\\nfrom a hidden base, have won\\r\\ntheir first victory against\\r\\nthe evil Galactic Empire.\\r\\n\\r\\nDuring the battle, Rebel\\r\\nspies managed to steal secret\\r\\nplans to the Empire's\\r\\nultimate weapon, the DEATH\\r\\nSTAR, an armored space\\r\\nstation with enough power\\r\\nto destroy an entire planet.\\r\\n\\r\\nPursued by the Empire's\\r\\nsinister agents, Princess\\r\\nLeia races home aboard her\\r\\nstarship, custodian of the\\r\\nstolen plans that can save her\\r\\npeople and restore\\r\\nfreedom to the galaxy....\",\r\n    \"director\": \"George Lucas\",\r\n    \"producer\": \"Gary Kurtz, Rick McCallum\",\r\n    \"release_date\": \"1977-05-25\",\r\n    \"characters\": [\r\n        \"https://swapi.dev/api/people/1/\",\r\n        \"https://swapi.dev/api/people/2/\",\r\n        \"https://swapi.dev/api/people/3/\",\r\n        \"https://swapi.dev/api/people/4/\",\r\n        \"https://swapi.dev/api/people/5/\",\r\n        \"https://swapi.dev/api/people/6/\",\r\n        \"https://swapi.dev/api/people/7/\",\r\n        \"https://swapi.dev/api/people/8/\",\r\n        \"https://swapi.dev/api/people/9/\",\r\n        \"https://swapi.dev/api/people/10/\",\r\n        \"https://swapi.dev/api/people/12/\",\r\n        \"https://swapi.dev/api/people/13/\",\r\n        \"https://swapi.dev/api/people/14/\",\r\n        \"https://swapi.dev/api/people/15/\",\r\n        \"https://swapi.dev/api/people/16/\",\r\n        \"https://swapi.dev/api/people/18/\",\r\n        \"https://swapi.dev/api/people/19/\",\r\n        \"https://swapi.dev/api/people/81/\"\r\n    ],\r\n    \"planets\": [\r\n        \"https://swapi.dev/api/planets/1/\",\r\n        \"https://swapi.dev/api/planets/2/\",\r\n        \"https://swapi.dev/api/planets/3/\"\r\n    ],\r\n    \"starships\": [\r\n        \"https://swapi.dev/api/starships/2/\",\r\n        \"https://swapi.dev/api/starships/3/\",\r\n        \"https://swapi.dev/api/starships/5/\",\r\n        \"https://swapi.dev/api/starships/9/\",\r\n        \"https://swapi.dev/api/starships/10/\",\r\n        \"https://swapi.dev/api/starships/11/\",\r\n        \"https://swapi.dev/api/starships/12/\",\r\n        \"https://swapi.dev/api/starships/13/\"\r\n    ],\r\n    \"vehicles\":[\r\n        \"vehiculo 1\"\r\n    ],\r\n    \"species\": [\r\n        \"https://swapi.dev/api/species/1/\",\r\n        \"https://swapi.dev/api/species/2/\",\r\n        \"https://swapi.dev/api/species/3/\",\r\n        \"https://swapi.dev/api/species/4/\",\r\n        \"https://swapi.dev/api/species/5/\"\r\n    ],\r\n    \"created\": \"2014-12-10T14:23:31.880000Z\",\r\n    \"edited\": \"2014-12-20T19:49:45.256000Z\",\r\n    \"url\": \"https://swapi.dev/api/films/1/\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/contents/newContent"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/contents/4",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"la uno actualizadaa\",\r\n    \"episode_id\": 1,\r\n    \"opening_crawl\": \"It is a period of civil war.\\r\\nRebel spaceships, striking\\r\\nfrom a hidden base, have won\\r\\ntheir first victory against\\r\\nthe evil Galactic Empire.\\r\\n\\r\\nDuring the battle, Rebel\\r\\nspies managed to steal secret\\r\\nplans to the Empire's\\r\\nultimate weapon, the DEATH\\r\\nSTAR, an armored space\\r\\nstation with enough power\\r\\nto destroy an entire planet.\\r\\n\\r\\nPursued by the Empire's\\r\\nsinister agents, Princess\\r\\nLeia races home aboard her\\r\\nstarship, custodian of the\\r\\nstolen plans that can save her\\r\\npeople and restore\\r\\nfreedom to the galaxy....\",\r\n    \"director\": \"George Lucas\",\r\n    \"producer\": \"Gary Kurtz, Rick McCallum\",\r\n    \"release_date\": \"1977-05-25\",\r\n    \"characters\": [\r\n        \"https://swapi.dev/api/people/1/\",\r\n        \"https://swapi.dev/api/people/2/\",\r\n        \"https://swapi.dev/api/people/3/\",\r\n        \"https://swapi.dev/api/people/4/\",\r\n        \"https://swapi.dev/api/people/5/\",\r\n        \"https://swapi.dev/api/people/6/\",\r\n        \"https://swapi.dev/api/people/7/\",\r\n        \"https://swapi.dev/api/people/8/\",\r\n        \"https://swapi.dev/api/people/9/\",\r\n        \"https://swapi.dev/api/people/10/\",\r\n        \"https://swapi.dev/api/people/12/\",\r\n        \"https://swapi.dev/api/people/13/\",\r\n        \"https://swapi.dev/api/people/14/\",\r\n        \"https://swapi.dev/api/people/15/\",\r\n        \"https://swapi.dev/api/people/16/\",\r\n        \"https://swapi.dev/api/people/18/\",\r\n        \"https://swapi.dev/api/people/19/\",\r\n        \"https://swapi.dev/api/people/81/\"\r\n    ],\r\n    \"planets\": [\r\n        \"https://swapi.dev/api/planets/1/\",\r\n        \"https://swapi.dev/api/planets/2/\",\r\n        \"https://swapi.dev/api/planets/3/\"\r\n    ],\r\n    \"starships\": [\r\n        \"https://swapi.dev/api/starships/2/\",\r\n        \"https://swapi.dev/api/starships/3/\",\r\n        \"https://swapi.dev/api/starships/5/\",\r\n        \"https://swapi.dev/api/starships/9/\",\r\n        \"https://swapi.dev/api/starships/10/\",\r\n        \"https://swapi.dev/api/starships/11/\",\r\n        \"https://swapi.dev/api/starships/12/\",\r\n        \"https://swapi.dev/api/starships/13/\"\r\n    ],\r\n    \"species\": [\r\n        \"https://swapi.dev/api/species/1/\",\r\n        \"https://swapi.dev/api/species/2/\",\r\n        \"https://swapi.dev/api/species/3/\",\r\n        \"https://swapi.dev/api/species/4/\",\r\n        \"https://swapi.dev/api/species/5/\"\r\n    ],\r\n    \"created\": \"2014-12-10T14:23:31.880000Z\",\r\n    \"edited\": \"2014-12-20T19:49:45.256000Z\",\r\n    \"url\": \"https://swapi.dev/api/films/1/\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/contents/updateContent/1"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/contents/deleteContent/1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/contents/deleteContent/1"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/contents/coldStart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:3000/contents/coldStart"
+			},
+			"response": []
+		}
+	]
+}
