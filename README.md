@@ -52,6 +52,8 @@ JWT_EXPIRES=1d
 La aplicacion utiliza una base de datos MongoDB. Recomiendo descargar mongoDB Compass, y crear una nueva conexion para poder visualizar como se guardan en distintas colecciones los documentos creados a lo largo de la app.
 
 Asi se verá la base de datos, y sus colecciones:
+
+
 ![Alt text](image.png)
 
 Asi se veran los documentos insertados en la colección de "contents", tal cual responde SWAPI.
