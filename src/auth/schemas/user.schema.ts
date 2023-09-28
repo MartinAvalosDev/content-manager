@@ -4,7 +4,7 @@ import { Role } from "../dtos/signup.dto";
 @Schema({
     timestamps: true,
 })
-export class User{
+export class User {
     @Prop()
     role: Role;
 
