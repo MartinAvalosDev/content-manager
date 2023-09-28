@@ -35,7 +35,7 @@ El primer paso es registranos en /signup, luego con el mismo email y password pa
 Una vez que hayamos iniciado sesion podremos operar los distintos metodos mencionados anteriormente.
 Debemos pasar por 'Authorization header', el token que hayamos recibido en el login. (Atencion! ese token lleva dentro el rol y user_id de mongo, por lo cual en todo momento la app sabrá que rol tiene ese usuario a traves del token, ademas de autenticarlo).
 
-Solo queda mirar el codigo y las buenas practicas llevadas a cabo, modularizando los componentes de auth y contents, creando colecciones distintas de mongo para los users y para los contents, usando Dto´s para validar los campos del body, enviados tanto para crear como updatear contenidos (Tienen distintas validaciones), etc.
+Solo queda mirar el codigo y las buenas practicas llevadas a cabo, modularizando los componentes de auth y contents, creando colecciones distintas de mongo para los users y para los contents, usando Dto´s para validar los campos del body, enviados tanto para crear como updatear contenidos (Tienen distintas validaciones), uso de CONVENTIONAL COMMITS:( https://www.conventionalcommits.org/en/v1.0.0/ ), el desarrollo se fue commiteando lo mas desestructurado y escalable posible, siempre es bueno tener empatía por quien lo va a leer.
 
 ## Informacion sobre archivo .ENV:
 
@@ -50,6 +50,8 @@ JWT_EXPIRES=1d
 ## Informacion sobre MONGODB:
 
 La aplicacion utiliza una base de datos MongoDB. Recomiendo descargar mongoDB Compass, y crear una nueva conexion para poder visualizar como se guardan en distintas colecciones los documentos creados a lo largo de la app.
+
+![Alt text](image-1.png)
 ## Informacion sobre los [/ENDPOINTS]:
 
 /coldStart [RutaPublica]
