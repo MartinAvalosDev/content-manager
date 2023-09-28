@@ -123,42 +123,42 @@
 //       expect(result).toEqual([mockContent]);
 //     });
 //   });
-  
+
 //   describe('findContentById', () => {
 //     it('should find and return a content by ID', async () => {
 //       jest.spyOn(model, 'findOne').mockResolvedValue(mockContent);
 //       const role: Role = Role.USER;
-      
+
 //       const result = await contentService.findContentById(mockContent.episode_id, role);
-      
+
 //       expect(model.findOne).toHaveBeenCalledWith(mockContent.episode_id);
 //       expect(result).toEqual(mockContent);
 //     });
-    
+
 //     it('should throw UnauthorizedException if invalid role is provided', async () => {
 //       const role: Role = Role.ADMIN;
-      
+
 //       const isValidObjectIDMock = jest
 //       .spyOn(mongoose, 'isValidObjectId')
 //       .mockReturnValue(false);
-      
+
 //       await expect(contentService.findContentById(mockContent.episode_id, role )).rejects.toThrow(
 //         NotFoundException,
 //         );
-        
+
 //         expect(isValidObjectIDMock).toHaveBeenCalledWith(mockContent.episode_id);
 //         isValidObjectIDMock.mockRestore();
 //       });
-      
+
 //       it('should throw NotFoundException if content is not found', async () => {
 //         jest.spyOn(model, 'findOne').mockResolvedValue(null);
 //         const role: Role = Role.USER;
 //         const episode_id = 345;
-        
+
 //         await expect(contentService.findContentById(episode_id,role )).rejects.toThrow(
 //           NotFoundException,
 //           );
-          
+
 //           expect(model.findOne).toHaveBeenCalledWith(mockContent.episode_id);
 //         });
 //   });
@@ -233,7 +233,7 @@
 //       expect(result).toEqual(mockContent);
 //     });
 //   });
-      
+
 //   describe('updateContent', () => {
 //         it('should update and return a content', async () => {
 //       const updatedContent = { ...mockContent, title: 'Updated name' };

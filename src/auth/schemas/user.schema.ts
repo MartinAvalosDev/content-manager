@@ -1,20 +1,20 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Role } from "../dtos/signup.dto";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Role } from '../dtos/signup.dto';
 
 @Schema({
-    timestamps: true,
+  timestamps: true,
 })
 export class User {
-    @Prop()
-    role: Role;
+  @Prop()
+  role: Role;
 
-    @Prop({
-        unique: [true, 'Duplicate email entered']
-    })
-    email: string;
+  @Prop({
+    unique: [true, 'Duplicate email entered'],
+  })
+  email: string;
 
-    @Prop()
-    password: string;
+  @Prop()
+  password: string;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User)
+export const UserSchema = SchemaFactory.createForClass(User);

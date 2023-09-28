@@ -11,22 +11,22 @@ import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
-    PassportModule.register({defaultStrategy:'jwt'}),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       inject: [ConfigService],
-      useFactory: (config: ConfigService)=>{
+      useFactory: (config: ConfigService) => {
         return {
           secret: config.get<string>('JWT_SECRET'),
           signOptions: {
-            expiresIn: config.get<string | number>('JWT_EXPIRES')
+            expiresIn: config.get<string | number>('JWT_EXPIRES'),
           },
-        }
-      }
+        };
+      },
     }),
-    MongooseModule.forFeature([{name: 'User', schema: UserSchema}])
+    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
-  exports: [JwtStrategy, PassportModule]
+  exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}

@@ -14,7 +14,7 @@ import { AuthModule } from './auth/auth.module';
     }),
     MongooseModule.forRoot(process.env.MONGO_URI),
     ContentModule,
-    AuthModule
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
