@@ -14,13 +14,14 @@ import { Content } from './schemas/content.schema';
 import { CreateContentDto } from './dtos/create-content.dto';
 import { UpdateContentDto } from './dtos/update-content.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-
+@ApiTags('Contents')
+@ApiBearerAuth()
 @Controller('contents')
 export class ContentController {
   constructor(private contentService: ContentService) { }
-  @ApiBearerAuth()
+
   @Get()
   @UseGuards(AuthGuard())
   async getAllFilms(
@@ -30,7 +31,7 @@ export class ContentController {
     return this.contentService.findContents(req.user.role);
   }
 
-  @ApiBearerAuth()
+
   @Get(':episodeId')
   @UseGuards(AuthGuard())
   async getFilmById(
@@ -47,7 +48,7 @@ export class ContentController {
     return this.contentService.loadDataSource();
   }
 
-  @ApiBearerAuth()
+
   @Post('/newContent')
   @UseGuards(AuthGuard())
   async createNewContent(
@@ -59,7 +60,7 @@ export class ContentController {
     return this.contentService.createContent(content, req.user.role);
   }
 
-  @ApiBearerAuth()
+
   @Put('/updateContent/:episodeId')
   @UseGuards(AuthGuard())
   async updateContent(
@@ -73,7 +74,7 @@ export class ContentController {
     return this.contentService.updateContent(episodeId, content, req.user.role);
   }
 
-  @ApiBearerAuth()
+
   @Delete('/deleteContent/:episodeId')
   @UseGuards(AuthGuard())
   async deleteContent(

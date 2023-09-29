@@ -12,7 +12,9 @@ async function bootstrap() {
     .setTitle('Content-Manager API')
     .setDescription(swaggerDescription)
     .setVersion('1.0')
-    .addTag('contents')
+    .addTag('Welcome')
+    .addTag('Auth')
+    .addTag('Contents')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
